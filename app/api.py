@@ -1,10 +1,10 @@
 from fastapi import Depends, FastAPI, APIRouter
-from app.users import current_active_user, fastapi_users, jwt_authentication
+from app.users import current_active_user, fastapi_users, cookie_authentication
 
 api_router = APIRouter()
 
 api_router.include_router(
-    fastapi_users.get_auth_router(jwt_authentication), prefix="/auth/jwt", tags=["auth"]
+    fastapi_users.get_auth_router(cookie_authentication), prefix="/auth/cookie", tags=["auth"]
 )
 api_router.include_router(
     fastapi_users.get_register_router(), prefix="/auth", tags=["auth"]
