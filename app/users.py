@@ -24,8 +24,13 @@ class UserManager(BaseUserManager[UserCreate, UserDB]):
     async def on_after_forgot_password(self, user: UserDB, token: str, request: Optional[Request] = None):
         print(f"User {user.id} has forgot their password. Reset token: {token}")
 
-    async def after_verification_request(self, user: UserDB, token: str, request: Optional[Request] = None):
-        print(f"Verification requested for user {user.id}. Verification token: {token}")
+    async def on_after_request_verify(self, user: UserDB, token: str, request: Optional[Request] = None) -> None:
+        print(f"Verification requested for user {user.id}. Validation token: {token}")
+
+    async def on_after_verify(
+        self, user: UserDB, request: Optional[Request] = None
+    ) -> None:
+        print(f"User {user.id} verified")
 
 
 def get_user_manager(user_db: SQLAlchemyUserDatabase = Depends(get_user_db)):
