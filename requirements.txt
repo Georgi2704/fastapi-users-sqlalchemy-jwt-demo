@@ -1,0 +1,4 @@
+fastapi
+uvicorn[standard]
+fastapi-users[sqlalchemy]==8.1.0
+databases[sqlite]
